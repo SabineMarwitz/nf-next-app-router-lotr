@@ -1,5 +1,6 @@
 import { volumes } from "@/lib/data";
 import Link from "next/link";
+import Image from "next/image";
 
 
 export default function VolumeDetail({ params }: { params: { aslug: string } }) {
@@ -14,5 +15,11 @@ export default function VolumeDetail({ params }: { params: { aslug: string } }) 
         <h1>{ content.title }</h1>
         <p>{ content.description }</p>
         <ul>{content.books.map((b) => <li key={b.ordinal}> {b.ordinal}: {b.title} </li> )}</ul>
+        <Image 
+            src={content.cover}
+            height={230}
+            width={140}
+            alt="A cover picture"
+        />;
     </>
 }
