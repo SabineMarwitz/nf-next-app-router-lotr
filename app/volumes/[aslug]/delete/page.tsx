@@ -1,22 +1,15 @@
-"use client";
-import { redirect, useParams } from "next/navigation";
-import React from "react";
+import { deleteVolume } from "@/app/volumes-actions";
 
-const DeleteVolumePage = () => {
-  const { aslug } = useParams();
-
-  const handleDelete = async () => {
-    await fetch(`/api/volumes/${aslug}`, {
-      method: "DELETE",
-    });
-    redirect('/volumes');
-  };
-
-  return (
-    <div>
-      <p> Do you want to delete Volume with slug #{aslug}?</p>
-      <button onClick={handleDelete}>Delete</button>
-    </div>
+  const DeleteVolumePage = async ({ params }) => {
+    const { aslug } = await params;
+    
+    return (
+      <div>
+        <p> Do you want to delete Volume with slug #{aslug}?</p>
+        <form action={deleteVolume.bind(null, aslug)}>
+          <button type="submit">Delete</button>
+        </form>
+      </div>
   );
 };
 

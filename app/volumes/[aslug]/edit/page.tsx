@@ -1,40 +1,15 @@
-"use client";
+import { getVolume, updateVolume } from "@/app/volumes-actions";
 
-import { redirect, useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-
-export default function EditVolume() {
-  const { aslug } = useParams();
-  const [title, setTitle] = useState("");
-
-  // Code to fetch Note by ID
-  const fetchVolume = async (aslug) => {
-    const res = await fetch(`/api/volumes/${aslug}`);
-    const data = await res.json();
-    setTitle(data.title);
-  };
-
-  useEffect(() => {
-    fetchVolume(aslug);
-  }, []);
-
-  const handleEdit = async () => {
-    await fetch(`/api/volumes/${aslug}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ aslug, title }),
-    });
-    redirect('/volumes');
-  };
+export default async function EditVolume({params}) {
+  const { aslug } = await params;
+  const volume = await getVolume( aslug );
 
   return (
     <div>
-      <input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <button onClick={handleEdit}>Edit</button>
+      <form action={updateVolume.bind(null, volume.slug)}>
+        <input name="title" defaultValue={volume.title} />
+        <button type="submit">Update</button>
+      </form>
     </div>
   );
 }
