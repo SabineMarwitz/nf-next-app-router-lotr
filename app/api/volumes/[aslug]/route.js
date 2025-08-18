@@ -12,7 +12,7 @@ export async function DELETE(request, { params }) {
 
   const indexToDelete = volumes.findIndex((volume) => volume.slug === aslug);
   if (indexToDelete === -1) {
-    return NextResponse.json({ error: "Note not found" }, { status: 404 });
+    return NextResponse.json({ error: "Volume not found" }, { status: 404 });
   }
   volumes.splice(indexToDelete, 1);
   return NextResponse.json({ success: true });
