@@ -1,5 +1,5 @@
 "use client";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import React from "react";
 
 const DeleteVolumePage = () => {
@@ -9,11 +9,12 @@ const DeleteVolumePage = () => {
     await fetch(`/api/volumes/${aslug}`, {
       method: "DELETE",
     });
+    redirect('/volumes');
   };
 
   return (
     <div>
-      <p> Do you want to delete Note with slug #{aslug}?</p>
+      <p> Do you want to delete Volume with slug #{aslug}?</p>
       <button onClick={handleDelete}>Delete</button>
     </div>
   );

@@ -1,4 +1,5 @@
 "use client";
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 
 const AddVolume = () => {
@@ -9,6 +10,7 @@ const AddVolume = () => {
         header: { "Content-Type": "application/json" },
         body: JSON.stringify({ title }),
     });
+    redirect('/volumes');
   };
 
     return (

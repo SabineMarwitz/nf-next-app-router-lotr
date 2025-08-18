@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function EditVolume() {
@@ -24,6 +24,7 @@ export default function EditVolume() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ aslug, title }),
     });
+    redirect('/volumes');
   };
 
   return (
